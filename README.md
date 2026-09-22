@@ -51,9 +51,11 @@ After installing the dependencies above, run:
 ```
 
 You play White and move first; the AI plays Black. Choose Easy (depth 4),
-Medium (6), Hard (8), or Expert (10). The selected depth applies to every AI
-turn. Start with Easy: higher depths can take much longer, with no search
-deadline. The first turn also needs time for Numba compilation; the first AI
+Medium (6), Hard (8), or Expert (10). By design, the AI uses depth 8 during
+the first 10 moves (counting both players' moves), then switches to your
+selected depth. Even Easy therefore searches at depth 8 in the opening.
+Higher depths can take much longer, with no search deadline.
+The first turn also needs time for Numba compilation; the first AI
 timing includes any remaining search compilation.
 
 - Choose a move by its number in the displayed legal-move list, or enter

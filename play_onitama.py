@@ -116,6 +116,7 @@ def setup_game():
     print()
 
     # Choose difficulty
+    print("AI uses depth 8 for the first 10 moves (both players combined), then your chosen depth.")
     while True:
         print("Choose AI difficulty:")
         print("1. Easy (depth 4)")
@@ -185,10 +186,11 @@ def main():
             print(f"You played: {square_to_coords(move[0])} -> {square_to_coords(move[1])} using {CARD_NAMES[move[2]]}")
 
         else:  # AI turn
+            depth = 8 if move_number <= 10 else ai_depth
             print("AI is thinking...")
             start_time = time.time()
             score, move, node_count = minimax(p1_bb, p2_bb, p1_cards, p2_cards, extra_card,
-                                      wk_pos, bk_pos, is_p1, ai_depth, -10000, 10000)
+                                      wk_pos, bk_pos, is_p1, depth, -10000, 10000)
             end_time = time.time()
 
             if move[0] == -1:  # No valid moves
