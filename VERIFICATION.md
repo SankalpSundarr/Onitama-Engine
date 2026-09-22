@@ -1,4 +1,22 @@
-# Starter verification
+# Verification
+
+## Terminal game update
+
+Checked on Windows with Python 3.12, NumPy 2.5.3, and Numba 0.67.0:
+
+- An interactive smoke run with scripted input completes a human White move,
+  a real Numba depth-4 Black AI response, and a clean quit.
+- Help, invalid text, and out-of-range move numbers are handled.
+- All 25 square coordinates round-trip, including lowercase input; invalid
+  coordinates are rejected.
+- All four difficulty choices select the documented depths. The smoke run
+  confirms Easy passes depth 4 to the AI search on its first turn.
+- A controlled no-legal-move case stops without declaring a winner and
+  reports zero completed moves.
+
+This is a smoke check, not a full game-rules audit or performance benchmark.
+
+## Original archive verification
 
 Checked while preparing this archive:
 

@@ -11,6 +11,7 @@ Numba compilation, and minimax search with alpha-beta pruning.
 - Alpha-beta minimax with capture and immediate-win move ordering.
 - Static evaluation using material, mobility, and master threats.
 - Search node counts and elapsed-time reporting.
+- Interactive terminal play against the AI, with four difficulty levels.
 - A local Flask API for requesting moves and evaluating positions.
 
 ## Quick start: Windows PowerShell
@@ -40,6 +41,35 @@ can take much longer; the engine has no time limit. Ctrl+C stops the program.
 
 On macOS/Linux, create an environment with `python3 -m venv .venv`, then use
 `.venv/bin/python` in place of `.\.venv\Scripts\python.exe`.
+
+## Play against the AI
+
+After installing the dependencies above, run:
+
+```powershell
+.\.venv\Scripts\python.exe play_onitama.py
+```
+
+You play White and move first; the AI plays Black. Choose Easy (depth 4),
+Medium (6), Hard (8), or Expert (10). The selected depth applies to every AI
+turn. Start with Easy: higher depths can take much longer, with no search
+deadline. The first turn also needs time for Numba compilation; the first AI
+timing includes any remaining search compilation.
+
+- Choose a move by its number in the displayed legal-move list, or enter
+  `from to card`, such as `A1 B2 Tiger` (format example; the move must be legal).
+- Coordinates run from `A1` to `E5`, matching the printed board. Coordinates
+  and card names are case-insensitive.
+- Enter `help` to show legal moves again, or `quit` at a move prompt to exit.
+  Ctrl+C also exits.
+- Your master is `K` and your students are `P`; the AI uses `k` and `p`.
+  Capture the opposing master or move your master from `C1` to the temple at
+  `C5` to win. The AI's target temple is `C1`.
+
+Each game starts with the same cards: White has Cobra and Goose, Black has
+Elephant and Frog, and Tiger is the side card. The used card is exchanged
+with the side card after each move. If a player has no legal move, the game
+stops without declaring a winner; pass-and-card-exchange is not implemented.
 
 ## Local API
 
@@ -72,6 +102,7 @@ The first search request also incurs JIT compilation time.
 | --- | --- |
 | `onitama_optimized.py` | Original main engine |
 | `run_demo.py` | Configurable, bounded demo with JIT warm-up |
+| `play_onitama.py` | Human-versus-AI terminal game with difficulty selection |
 | `backend.py` | Local Flask API with coordinate and JSON fixes |
 | `requirements.txt` | Dependencies installed by pip |
 | `legacy/` | Earlier files retained for historical context |
@@ -104,6 +135,7 @@ a smoke check, not a full performance study.
 
 - The core engine is copied from the supplied Numba implementation.
 - Added `run_demo.py`, dependency instructions, and Git ignore settings.
+- Added `play_onitama.py` for interactive terminal games against the AI.
 - Both API routes now use the same frontend coordinate conversion.
 - Coordinate outputs are converted to Python integers for JSON serialization.
 - `/analyze` returns `best_move: null` when no move is returned by the engine.

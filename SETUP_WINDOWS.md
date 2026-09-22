@@ -50,6 +50,16 @@ To run 20 moves at depth 6:
 .\.venv\Scripts\python.exe run_demo.py --depth 6 --plies 20
 ```
 
+To play against the AI in the terminal:
+
+```powershell
+.\.venv\Scripts\python.exe play_onitama.py
+```
+
+Choose a difficulty (start with Easy), then select moves from the numbered
+list. You play White and move first. Enter `help` to list moves or `quit` to
+exit at a move prompt. See the README for coordinates, cards, and limitations.
+
 ## 4. Optional: start the local API
 
 ```powershell
